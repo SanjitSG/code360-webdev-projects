@@ -18,61 +18,97 @@
   <body>
     <!-- Navbar -->
     <nav
-      class="navbar navbar-expand-lg navbar-light"
+      class="navbar navbar-expand-lg navbar-light bg-ligh"
       style="background-color: #e3f2fd"
     >
+      <a
+        class="navbar-brand"
+        href="#"
+        >Restaurant</a
+      >
       <!-- Navbar toggler for mobile view -->
       <button
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Navigation links -->
-      <a
-        href="#"
-        class="nav-link btn btn-primary"
-        >All</a
+      <div
+        class="collapse navbar-collapse"
+        id="navbarSupportedContent"
       >
-      <!-- ... (at least 5 nav-links as per test cases) -->
-      <a
-        href="#"
-        class="nav-link btn btn-primary"
-        data-filter="mains"
-        >Mains</a
-      >
-      <a
-        href="#"
-        class="nav-link btn btn-primary"
-        data-filter="starters"
-        >Starters</a
-      >
-      <a
-        href="#"
-        class="nav-link btn btn-primary"
-        data-filter="beverages"
-        >Beverages</a
-      >
-      <a
-        href="#"
-        class="nav-link btn btn-primary"
-        data-filter="desserts"
-        >Desserts</a
-      >
-      <!-- Search input -->
-      <input
-        type="text"
-        id="search-input"
-        placeholder="Search"
-      />
+        <!-- Search input -->
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            id="search-input"
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+        </form>
+        <!-- Navigation links -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a
+              href="#"
+              class="nav-link btn"
+              >All</a
+            >
+          </li>
+          <li class="nav-item active">
+            <a
+              href="#"
+              class="nav-link btn"
+              data-filter="mains"
+              >Mains</a
+            >
+          </li>
+          <li class="nav-item active">
+            <a
+              href="#"
+              class="nav-link btn"
+              data-filter="starters"
+              >Starters</a
+            >
+          </li>
+          <li class="nav-item active">
+            <a
+              href="#"
+              class="nav-link btn"
+              data-filter="beverages"
+              >Beverages</a
+            >
+          </li>
+          <li class="nav-item active">
+            <a
+              href="#"
+              class="nav-link btn"
+              data-filter="desserts"
+              >Desserts</a
+            >
+          </li>
+        </ul>
+      </div>
     </nav>
 
+    <!-- video -->
+    <!-- 16:9 aspect ratio -->
+    <div class="embed-responsive embed-responsive-21by9 w-75 mx-auto my-2">
+      <video
+        class="embed-responsive-item mw-100"
+        controls="0"
+        autoplay="1"
+        loop="1"
+        src="https://files.codingninjas.in/restaurant-1706081051.mp4"
+      ></video>
+    </div>
     <!-- Menu items -->
     <!-- Items will be inserted here by JavaScript -->
 
