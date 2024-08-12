@@ -108,11 +108,11 @@ const menu = [
   },
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
-  // renders card
-  function renderMenuCard(item) {
+document.addEventListener("DOMContentLoaded", function () {
+  // Function to render menu items
+  function renderMenuItem(item) {
     return `<div class="menu-item col-12 col-md-6 col-lg-4">
-      <div class="card">
+      <div class="card mb-1">
         <img src="${item.img}" class="card-img-top" alt="${item.title}">
         <div class="card-body">
           <h5 class="card-title">${item.title}</h5>
@@ -124,9 +124,34 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
     `;
   }
-});
 
-const filterMenu = (category) => {
-  const filteredMenu =
-    category === "add" ? menu : menu.filter((item) => item.category === category);
-};
+  // Function to filter menu items based on category
+  function filterMenu(category) {
+    const filteredMenu =
+      category === "all" ? menu : menu.filter((item) => item.category === category);
+    const menuContainer = document.getElementById("menu-items");
+    menuContainer.innerHTML = filteredMenu.map(renderMenuItem).join("");
+  }
+
+  // Initial rendering of menu
+  filterMenu("all");
+
+  // Add click event listeners to filter buttons
+  const filterButtons = document.querySelectorAll(".nav-link");
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const category = this.getAttribute("data-filter");
+      filterMenu(category);
+    });
+  });
+
+  // Add input event listener to search input
+  const searchInput = document.getElementById("search-input");
+  searchInput.addEventListener("input", function () {
+    const searchTerm = this.value.toLowerCase();
+    const filteredMenu = menu.filter((item) => item.title.toLowerCase().includes(searchTerm));
+    filterMenu("all"); // Reset to display all items
+    const menuContainer = document.getElementById("menu-items");
+    menuContainer.innerHTML = filteredMenu.map(renderMenuItem).join("");
+  });
+});
