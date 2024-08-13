@@ -1,10 +1,22 @@
-document.getElementById('location-form').addEventListener('submit', getWeather);
+document.getElementById("location-form").addEventListener("submit", getWeather);
 
-function getWeather(e) {
-  //Write you code logic here
+const API_KEY = "bfe40e05d9371e69717cc8e8daa9bf71";
 
-  // Error should be very specific
-  // Error: Failed to fetch weather data,   should always fetch this error in case of any failure otherwise you test cases will get failed.
-  
+async function getWeather(e) {
+  e.preventDefault();
+  try {
+    const location = document.getElementById("location-input").value;
+    console.log(location);
 
+    const fetchData = await fetch(
+      "http://api.openweathermap.org/data/2.5/weather?q=" +
+        location +
+        "&appid=bfe40e05d9371e69717cc8e8daa9bf71&units=metric"
+    );
+
+    const weatherData = await fetchData.json();
+    console.log(weatherData.name);
+  } catch (error) {
+    console.log(error);
+  }
 }
