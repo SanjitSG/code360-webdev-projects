@@ -1,1 +1,60 @@
-/* Write your desired css here */
+/* Carousel Style */
+.carousel {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-items {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.carousel-item img {
+  width: 100%;
+  display: block;
+}
+
+/* Drop Zone Styles */
+.dropzone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.dropzone.drag-over {
+  border-color: #000;
+}
+
+/* File List Styles */
+.file-list {
+  margin-top: 20px;
+}
+
+.file-list div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.description {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: red;
+}

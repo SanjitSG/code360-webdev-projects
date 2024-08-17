@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="styles.css"
+    />
     <title>Image To Do List</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="carousel">
-        <div class="carousel-items">
-    <div class="carousel-item"><img src="./carousel1.jpg" alt="img1"></div>
-    <div class="carousel-item"> <img src="./carousel2.jpg" alt="img2"></div>
-            
+      <div class="carousel-items">
+        <div class="carousel-item">
+          <img
+            src="./carousel1.jpg"
+            alt="Image 1"
+          />
         </div>
+        <div class="carousel-item">
+          <img
+            src="./carousel2.jpg"
+            alt="Image 2"
+          />
+        </div>
+        <!-- Add more carousel items if needed -->
+      </div>
     </div>
 
     <div class="app-container">
+      <div
+        id="dropzone"
+        class="dropzone"
+      >
+        <input
+          type="file"
+          id="fileInput"
+          multiple
+          accept="image/*"
+        />
+        <p>Drag and drop your images here or click to upload</p>
+      </div>
 
-        <!-- Define your rest of the things of the Image TODO List app here -->
-        
-        </div>
-
-        <div class="file-list" id="fileList">
-            <!-- Create the space here where your uploaded image will be visible -->
-        </div>
-        
-        
+      <div
+        class="file-list"
+        id="fileList"
+      >
+        <!-- Uploaded images with thumbnails and descriptions will appear here -->
+      </div>
     </div>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
