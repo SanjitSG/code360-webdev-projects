@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking App</title>
+    <style>
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    padding: 20px;
+    background-color: #140e0d;
+    color: #333;
+    line-height: 1.5;
+}
+
+.app {
+    max-width: 80%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"], textarea {
+    width: 90%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    margin-right: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+button {
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #00b33c;
+}
+
+.note {
+    padding: 15px;
+    background-color: #aaa7a7;
+    border-radius: 5px;
+    margin: 10px 0;
+    
+}
+
+.note-checkbox {
+    margin-right: 10px;
+}
+
+.note-title, .note-content {
+    margin: 0;
+    cursor: pointer;
+    position: relative; /* Allows positioning of pseudo-elements relative to these elements */
+ 
+}
+
+.note-title::before, .note-content::before {
+    content: ''; /* Start with empty content */
+    display: none; /* Hide it by default */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.note-title:hover, .note-content:hover {
+    visibility: hidden; /* Makes the element 'invisible' but it still takes up space */
+}
+
+.note-title:hover::before, .note-content:hover::before {
+    content: 'Edit'; /* Display "Edit" on hover */
+    display: block;
+    visibility: visible;
+    background-color: rgb(71, 69, 69);
+    color:white
+}
+
+
+hr {
+    width: 90%;
+    margin: 10px 0;
+    border-top: 1px solid #2a2727;
+}
+#wrap-it{
+        word-wrap: break-word;
+    }
+
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app">
+        <input type="text" id="noteTitle" placeholder="Note Title">
+        <textarea id="noteContent" placeholder="Note Content"></textarea>
+        <button onclick="saveNote()">Save Note</button>
+        <button onclick="deleteNote()">Delete Note</button>
+        <button onclick="clearAllNotes()">Clear All Notes</button>
+        <input type="text" id="search" placeholder="Search notes..." onkeyup="searchNotes()">
+        <div id="notesList"></div>
+    </div>
+    <template id="noteTemplate">
+        <div class="note">
+            <input type="checkbox" class="note-checkbox">
+            <h3 class="note-title"></h3>
+            <p class="note-content" id="wrap-it"></p>
+            <hr>
+        </div>
+    </template>
+    
+    <script>
+        let selectedNoteIndex;
+
+function saveNote() {
+    const title = document.getElementById('noteTitle').value;
+    const content = document.getElementById('noteContent').value;
+    if (title.trim() === '' || content.trim() === '') return alert('Both title and content are required!');
+
+    let notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : [];
+    if (selectedNoteIndex !== undefined) {
+        notes[selectedNoteIndex] = { title, content };
+        selectedNoteIndex = undefined;
+    } else {
+        notes.push({ title, content });
+    }
+    localStorage.setItem('notes', JSON.stringify(notes));
+    document.getElementById('noteTitle').value = '';
+    document.getElementById('noteContent').value = '';
+    displayNotes();
+}
+
+function displayNotes() {
+    let notesList = document.getElementById('notesList');
+    notesList.innerHTML = '';
+
+    let notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : [];
+    notes.forEach((note, index) => {
+        let template = document.getElementById('noteTemplate').content.cloneNode(true);
+        let noteDiv = template.querySelector('.note');
+ 
+
+        template.querySelector('.note-title').textContent = note.title;
+        template.querySelector('.note-content').textContent = note.content;
+
+        notesList.appendChild(template);
+    });
+}
+
+
+
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
