@@ -26,6 +26,10 @@ function displayNotes() {
   notes.forEach((note, index) => {
     let template = document.getElementById("noteTemplate").content.cloneNode(true);
     let noteDiv = template.querySelector(".note");
+    const noteTitle = template.querySelector(".note-title");
+    const noteContent = template.querySelector(".note-content");
+    noteTitle.onclick = () => selectNote(index);
+    noteContent.onclick = () => selectNote(index);
 
     template.querySelector(".note-title").textContent = note.title;
     template.querySelector(".note-content").textContent = note.content;
@@ -35,22 +39,59 @@ function displayNotes() {
 }
 
 function deleteNote() {
-  const notes = JSON.parse(localStorage.getItem("notes"));
-  const checkBoxes = document.querySelectorAll(".note-checkbox");
+  const notes = JSON.parse(localStorage.getItem("notes") || "[]");
+  const checkboxes = document.querySelectorAll(".note-checkbox");
 
-  //collecting indices of checked notes
+  // Collecting indices of checked notes
   const toDelete = [];
-  checkBoxes.forEach((checkbox, index) => {
+  checkboxes.forEach((checkbox, index) => {
     if (checkbox.checked) {
       toDelete.push(index);
     }
   });
 
-  // deleting notes based on checkboxes
+  // Deleting notes based on checkboxes
   for (let i = toDelete.length - 1; i >= 0; i--) {
     notes.splice(toDelete[i], 1);
   }
+
   localStorage.setItem("notes", JSON.stringify(notes));
   displayNotes();
 }
-displayNotes();
+
+function clearAllNotes() {
+  localStorage.removeItem("notes");
+  displayNotes();
+}
+
+function selectNote(index) {
+  let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+  document.getElementById("noteTitle").value = notes[index].title;
+  document.getElementById("noteContent").value = notes[index].content;
+  selectedNoteIndex = index;
+}
+
+function searchNotes() {
+  let searchText = document.getElementById("search").value.toLowerCase();
+  let notes = JSON.parse(localStorage.getItem("notes"));
+  let filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(searchText) || note.content.toLowerCase().includes(searchText));
+
+  displayFilteredNotes(filteredNotes);
+}
+
+function displayFilteredNotes(filteredNotes) {
+  let notesList = document.getElementById("notesList");
+  notesList.innerHTML = "";
+
+  filteredNotes.forEach((note, index) => {
+    let template = document.getElementById("noteTemplate").content.cloneNode(true);
+    let noteDiv = template.querySelector(".note");
+    noteDiv.onclick = () => selectNote(index);
+    template.querySelector(".note-title").textContent = note.title;
+    template.querySelector(".note-content").textContent = note.content;
+
+    notesList.appendChild(template);
+  });
+}
+
+window.onload = displayNotes;
