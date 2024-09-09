@@ -13,20 +13,22 @@
   <body>
     <h1>Budget Tracker</h1>
     <div class="container">
-      <form
-        id="budget-form"
-        onsubmit="calc()">
+      <form id="budget-form">
         <input
           type="text"
           id="description"
           placeholder="Enter income/expense description" />
         <input
           type="number"
-          id="amout"
+          id="amount"
           placeholder="Enter amount"
           required />
         <select id="type">
-          <option value="income">Income</option>
+          <option
+            value="income"
+            selected>
+            Income
+          </option>
           <option value="expense">Expense</option>
         </select>
         <button type="submit">Add</button>
